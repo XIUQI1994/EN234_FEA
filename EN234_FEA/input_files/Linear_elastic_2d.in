@@ -162,7 +162,7 @@
 %         In this example the states are the stresses sxx,syy,szz,sxy,sxz,syz
          PRINT STATE, Output_files\contourplots.dat
             DEGREES OF FREEDOM
-            FIELD VARIABLES, S11,S22,S33,S12
+            FIELD VARIABLES, S11,S22,S33,S12,SMISES
             DISPLACED MESH
             DISPLACEMENT SCALE FACTOR, 1.d0
          END PRINT STATE

@@ -300,13 +300,13 @@ subroutine fieldvars_linelast_2dbasic(lmn, element_identifier, n_nodes, node_pro
 
     real (prec)  ::  strain(3), dstrain(3)             ! Strain vector contains [e11, e22, 2e12]
     real (prec)  ::  stress(3)                         ! Stress vector contains [s11, s22, s12]
-    real (prec)  ::  sdev(3)                           ! Deviatoric stress
+    real (prec)  ::  sdev(4)                           ! Deviatoric stress
     real (prec)  ::  D(3,3)                            ! stress = D*(strain+dstrain)  (NOTE FACTOR OF 2 in shear strain)
     real (prec)  ::  B(3,length_dof_array)             ! strain = B*(dof_total+dof_increment)
     real (prec)  ::  dxidx(2,2), determinant           ! Jacobian inverse and determinant
     real (prec)  ::  x(2,length_coord_array/2)         ! Re-shaped coordinate array x(i,a) is ith coord of ath node
     real (prec)  :: E, xnu, D33, D11, D12              ! Material properties
-    real (prec)  :: p, smises                          ! Pressure and Mises stress
+    real (prec)  :: p, smises , s33                    ! Pressure and Mises stress
     !
     !     Subroutine to compute element contribution to project element integration point data to nodes
 
@@ -353,10 +353,14 @@ subroutine fieldvars_linelast_2dbasic(lmn, element_identifier, n_nodes, node_pro
         strain = matmul(B,dof_total)
         dstrain = matmul(B,dof_increment)
         stress = matmul(D,strain+dstrain)
-        p = sum(stress(1:2))/2.d0
-        sdev = stress
-        sdev(1:2) = sdev(1:2)-p
-        smises = dsqrt( dot_product(sdev(1:2),sdev(1:2)) + 2.d0*dot_product(sdev(3:3),sdev(3:3)) )*dsqrt(1.5d0)
+        s33 = xnu*sum(stress(1:2))
+        p = (s33 + sum(stress(1:2)))/3.d0
+        s33 = -xnu*stress(1)
+        sdev(1:2) = stress(1:2)
+        sdev(3) = s33
+        sdev(4) = stress(3)
+        sdev(1:3) = sdev(1:3)-p
+        smises = dsqrt( dot_product(sdev(1:3),sdev(1:3)) + 2.d0*(sdev(4)*sdev(4)) )*dsqrt(1.5d0)
         ! In the code below the strcmp( string1, string2, nchar) function returns true if the first nchar characters in strings match
         do k = 1,n_field_variables
             if (strcmp(field_variable_names(k),'S11',3) ) then
@@ -365,8 +369,8 @@ subroutine fieldvars_linelast_2dbasic(lmn, element_identifier, n_nodes, node_pro
                 nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(2)*N(1:n_nodes)*determinant*w(kint)
             else if (strcmp(field_variable_names(k),'S12',3) ) then
                 nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(3)*N(1:n_nodes)*determinant*w(kint)
-         ! else if (strcmp(field_variable_names(k),'S12',3) ) then
-                !nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(4)*N(1:n_nodes)*determinant*w(kint)
+            else if (strcmp(field_variable_names(k),'S33',3) ) then
+                nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + s33*N(1:n_nodes)*determinant*w(kint)
            !else if (strcmp(field_variable_names(k),'S13',3) ) then
                !nodal_fieldvariables(k,1:n_nodes) = nodal_fieldvariables(k,1:n_nodes) + stress(5)*N(1:n_nodes)*determinant*w(kint)
            ! else if (strcmp(field_variable_names(k),'S23',3) ) then

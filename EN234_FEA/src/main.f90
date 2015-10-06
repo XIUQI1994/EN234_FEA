@@ -8,9 +8,9 @@ program en234fea
 
 !  Demo codes - basic 3D linear elasticity
 !
-! infil = './input_files/linear_elastic_3d.in'
- ! open (unit = IOR, file = infil, status = 'old', ERR=500)
-  !outfil = './Output_files/linear_elastic_3d.out'
+!infil = './input_files/linear_elastic_3d.in'
+ !open (unit = IOR, file = infil, status = 'old', ERR=500)
+ !outfil = './Output_files/linear_elastic_3d.out'
  ! open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 
   !infil = './input_files/Holeplate_3d.in'
@@ -38,7 +38,7 @@ program en234fea
 infil = './input_files/linear_elastic_2d.in'
  open (unit = IOR, file = infil, status = 'old', ERR=500)
  outfil = './Output_files/linear_elastic_2d.out'
- open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 ! Homework 3, Basic 2D linear elasticity with different element types.
 !   infil = './input_files/holeplate_2d_tri3.in'
 !   open (unit = IOR, file = infil, status = 'old', ERR=500)
