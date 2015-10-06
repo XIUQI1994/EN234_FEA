@@ -8,15 +8,15 @@ program en234fea
 
 !  Demo codes - basic 3D linear elasticity
 !
-!  infil = './input_files/linear_elastic_3d.in'
-!  open (unit = IOR, file = infil, status = 'old', ERR=500)
-!  outfil = './Output_files/linear_elastic_3d.out'
-!  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+! infil = './input_files/linear_elastic_3d.in'
+ ! open (unit = IOR, file = infil, status = 'old', ERR=500)
+  !outfil = './Output_files/linear_elastic_3d.out'
+ ! open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 
-  infil = ./input_files/Holeplate_3d.in
-  open (unit = IOR, file = infil, status = 'old', ERR=500)
-  outfil = './Output_files/Holeplate_3d.out'
-  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+  !infil = './input_files/Holeplate_3d.in'
+  !open (unit = IOR, file = infil, status = 'old', ERR=500)
+  !outfil = './Output_files/Holeplate_3d.out'
+  !open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 
 
 !  infil = './input_files/linear_elastic_3d_dynamic.in'
@@ -35,23 +35,23 @@ program en234fea
 !
 !  Homework 3
 !  Basic 2 element test (one or two elements)
-!  infil = './input_files/linear_elastic_2d.in'
-!  open (unit = IOR, file = infil, status = 'old', ERR=500)
-!  outfil = './Output_files/linear_elastic_2d.out'
-!  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+infil = './input_files/linear_elastic_2d.in'
+ open (unit = IOR, file = infil, status = 'old', ERR=500)
+ outfil = './Output_files/linear_elastic_2d.out'
+ open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 ! Homework 3, Basic 2D linear elasticity with different element types.
-!  infil = './input_files/holeplate_2d_tri3.in'
-!  open (unit = IOR, file = infil, status = 'old', ERR=500)
-!  outfil = './Output_files/holeplate_2d_tri3.out'
-!  open (unit = IOR, file = infil, status = 'old', ERR=500)
-!  infil = './input_files/holeplate_2d_tri6.in'
-!  open (unit = IOR, file = infil, status = 'old', ERR=500)
-!  outfil = './Output_files/holeplate_2d_tri6.out'
-!  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
-!  infil = './input_files/holeplate_2d_quad4.in'
-!  open (unit = IOR, file = infil, status = 'old', ERR=500)
-!  outfil = './Output_files/holeplate_2d_quad4.out'
-!  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+!   infil = './input_files/holeplate_2d_tri3.in'
+!   open (unit = IOR, file = infil, status = 'old', ERR=500)
+!   outfil = './Output_files/holeplate_2d_tri3.out'
+!   open (unit = IOW, file = outfil, status = 'new', ERR=500)
+!infil = './input_files/holeplate_2d_tri6.in'
+!open (unit = IOR, file = infil, status = 'old', ERR=500)
+ !outfil = './Output_files/holeplate_2d_tri6.out'
+!open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+!infil = './input_files/holeplate_2d_quad4.in'
+ ! open (unit = IOR, file = infil, status = 'old', ERR=500)
+  !outfil = './Output_files/holeplate_2d_quad4.out'
+ ! open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 !  infil = './input_files/holeplate_2d_quad8.in'
 !  open (unit = IOR, file = infil, status = 'old', ERR=500)
 !  outfil = './Output_files/holeplate_2d_quad8.out'

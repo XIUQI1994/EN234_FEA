@@ -787,8 +787,6 @@
         END NODESET
 
 
-       END ELEMENTSET
-
 %       The DEGREE OF FREEDOM key assigns values to nodal DOFs
 %       The syntax is node set name, DOF number, VALUE/HISTORY/SUBROUTINE, value/history name/subroutine parameter list name.
 %     
