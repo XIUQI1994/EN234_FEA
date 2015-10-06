@@ -1,0 +1,114 @@
+
+
+ The input file has been read successfully 
+ Number of elements:              457
+ Number of nodes:                 259
+ Number of constraints:             0
+ Total no. degrees of freedom:    518
+
+
+ Direct Solver Profiler has completed profile computation 
+     Total number of equations        518
+     Maximum half bandwidth:           37
+     Mean half bandwidth:              28
+     RMS half bandwidth:               29
+     Size of stiffness matrix:      14279
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.3599E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.3599E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.115044D-02
+  Generalized Force norm        0.274028D-02
+  Out of balance force norm     0.957699D-16
+  Ratio                         0.246149D-13
+  Tolerance                     0.100000D-04
+
+
+    Step number     1 has completed successfully
+    Steps remaining:                           2
+    Elapsed time:                     1.0000    
+    Time remaining:                   9.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.2372E-03
+      Min diagonal in reduced matrix:    0.2706E-04
+      Ratio:                             0.8765E+01
+      Maximum no. diagonal digits lost:   0
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.3599E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.3599E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.142851D-16
+  Generalized Force norm        0.548057D-02
+  Out of balance force norm     0.200048D-16
+  Ratio                         0.365013D-14
+  Tolerance                     0.100000D-04
+
+
+    Step number     2 has completed successfully
+    Steps remaining:                           1
+    Elapsed time:                     2.0000    
+    Time remaining:                   8.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.2372E-03
+      Min diagonal in reduced matrix:    0.2706E-04
+      Ratio:                             0.8765E+01
+      Maximum no. diagonal digits lost:   0
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.3599E+03
+      Min diagonal in reduced matrix:    0.1000E+01
+      Ratio:                             0.3599E+03
+      Maximum no. diagonal digits lost:   2
+
+
+  Newton Raphson iteration       1
+  Correction norm               0.717786D-17
+  Generalized Force norm        0.822085D-02
+  Out of balance force norm     0.213587D-16
+  Ratio                         0.259812D-14
+  Tolerance                     0.100000D-04
+
+
+    Step number     3 has completed successfully
+    Steps remaining:                           0
+    Elapsed time:                     3.0000    
+    Time remaining:                   7.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.2372E-03
+      Min diagonal in reduced matrix:    0.2706E-04
+      Ratio:                             0.8765E+01
+      Maximum no. diagonal digits lost:   0
