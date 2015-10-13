@@ -3924,7 +3924,7 @@
 %       The HISTORY key defines a time history that can be applied to DOFs or distributed loads
         HISTORY, dof_history
           0.d0, 0.d0                  % Each line gives a time value and then a function value
-         10.d0, 0.001d0
+         3.d0, 0.003d0
         END HISTORY
 
         HISTORY, dload_history
@@ -4039,16 +4039,18 @@
          END PRINT STATE
 
 
-%          USER PRINT FILES
+          USER PRINT FILES
 %          List file names to contain the output. Fortran unit numbers are provided to each file in the user subroutine
-%            filename1.dat
+            jvalue.dat
 %            filename2.dat
-%          END USER PRINT FILES
-%          USER PRINT PARAMETERS
+          END USER PRINT FILES
+          USER PRINT PARAMETERS
 %            list of parameters to be passed to the subroutine
-%             1.d0, 6.d0
-%             4
-%          END USER print PARAMETERS
+             1247
+             1256
+             0.0006
+             4
+          END USER print PARAMETERS
 
         END STATIC STEP
          
