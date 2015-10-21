@@ -4135,7 +4135,7 @@ END NODES
 %       Define element properties - the values are passed to user subroutine elstif in the order they are listed here
 %       For the example provided, the params are Youngs Modulus, Poissons ratio 
         PROPERTIES
-         100.d0, 0.3d0
+         100.d0, 0.49999d0
         END PROPERTIES
 %     Define mass density (for explicity dynamics only)
 %       DENSITY, 10.d0
@@ -7230,7 +7230,7 @@ END MESH
 %       The HISTORY key defines a time history that can be applied to DOFs or distributed loads
         HISTORY, dof_history
           0.d0, 0.d0
-         10.d0, 0.1d0
+         10.d0, 1d0
         END HISTORY
 
         HISTORY, dload_history
@@ -7306,7 +7306,7 @@ END MESH
            3, 3, VALUE, 0.d0
            bot, 2, VALUE,  0.d0
            left, 1, VALUE, 0.d0
-           right, 1, HISTORY, dof_history
+          right, 1, HISTORY, dof_history
         END DEGREES OF FREEDOM
 
 
@@ -7317,9 +7317,9 @@ END MESH
 %           element set, face #, NORMAL, history name     (applies time dependent pressure normal to element face)
 %           element set, face #, SUBROUTINE, subroutine parameter name
 
-%        DISTRIBUTED LOADS
-%          end_elements, 4, Value, 0.d0,1.d0,0.d0
-%        END DISTRIBUTED LOADS
+%       DISTRIBUTED LOADS
+%         end_elements, 4, Value, 0.d0,1.d0,0.d0
+%       END DISTRIBUTED LOADS
 
 %       The CONSTRAINTS key gives a way to enforce constraints between pairs or groups of nodes.
 %       Useful, e.g. for periodic boundary conditions.

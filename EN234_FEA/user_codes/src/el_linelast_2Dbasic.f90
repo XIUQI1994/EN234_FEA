@@ -20,6 +20,9 @@ subroutine el_linelast_2dbasic(lmn, element_identifier, n_nodes, node_property_l
     use Element_Utilities, only : initialize_integration_points
     use Element_Utilities, only : calculate_shapefunctions
     use Element_Utilities, only : invert_small
+    use Element_Utilities, only : dNbardx=>vol_avg_shape_function_derivatives_2D
+
+
     implicit none
 
     integer, intent( in )         :: lmn                                                    ! Element number
@@ -29,6 +32,8 @@ subroutine el_linelast_2dbasic(lmn, element_identifier, n_nodes, node_property_l
     integer, intent( in )         :: length_coord_array                                     ! Total # coords
     integer, intent( in )         :: length_dof_array                                       ! Total # DOF
     integer, intent( in )         :: n_state_variables                                      ! # state variables for the element
+
+
 
     type (node), intent( in )     :: node_property_list(n_nodes)                  ! Data structure describing storage for nodal variables - see below
     !  type node
@@ -61,9 +66,11 @@ subroutine el_linelast_2dbasic(lmn, element_identifier, n_nodes, node_property_l
     real (prec)  ::  stress(3)                         ! Stress vector contains [s11, s22, s12]
     real (prec)  ::  D(3,3)                            ! stress = D*(strain+dstrain)  (NOTE FACTOR OF 2 in shear strain)
     real (prec)  ::  B(3,length_dof_array)             ! strain = B*(dof_total+dof_increment)
+    real (prec)  ::  dNdx_average(3,length_dof_array),Bmodifer(3,length_dof_array)
     real (prec)  ::  dxidx(2,2), determinant           ! Jacobian inverse and determinant
     real (prec)  ::  x(2,length_coord_array/2)         ! Re-shaped coordinate array x(i,a) is ith coord of ath node
     real (prec)  :: E, xnu, D33, D11, D12              ! Material properties
+    real (prec)  :: area
     !
     !     Subroutine to compute element stiffness matrix and residual force vector for 3D linear elastic elements
     !     El props are:
@@ -90,13 +97,31 @@ subroutine el_linelast_2dbasic(lmn, element_identifier, n_nodes, node_property_l
     E = element_properties(1)
     xnu = element_properties(2)
     d33 = 0.5D0*E/(1+xnu)
-    d11 = (1.D0-xnu)*E/( (1+xnu)*(1-2.D0*xnu) )
-    d12 = xnu*E/( (1+xnu)*(1-2.D0*xnu) )
+    d11 = (1.D0-xnu)*E/( (1.d0+xnu)*(1.d0-2.D0*xnu) )
+    d12 = xnu*E/( (1+xnu)*(1.d0-2.D0*xnu) )
     D(1,2) = d12
     D(2,1) = d12
     D(1,1) = d11
     D(2,2) = d11
     D(3,3) = d33
+
+    dNbardx=0.d0
+    area=0.d0
+    do kint=1,n_points
+    call calculate_shapefunctions(xi(1:2,kint),n_nodes,N,dNdxi)
+        dxdxi = matmul(x(1:2,1:n_nodes),dNdxi(1:n_nodes,1:2))
+        call invert_small(dxdxi,dxidx,determinant)
+        dNdx(1:n_nodes,1:2) = matmul(dNdxi(1:n_nodes,1:2),dxidx)
+        dNbardx=dNbardx+dNdx*w(kint)*determinant
+        area=area+w(kint)*determinant
+    end do
+        dNbardx=dNbardx/area
+        dNdx_average=0.d0
+        dNdx_average(1,1:2*n_nodes-1:2)=dNbardx(1:n_nodes,1)/2.d0
+        dNdx_average(1,2:2*n_nodes:2)=dNbardx(1:n_nodes,2)/2.d0
+        dNdx_average(2,1:2*n_nodes-1:2)=dNbardx(1:n_nodes,1)/2.d0
+        dNdx_average(2,2:2*n_nodes:2)=dNbardx(1:n_nodes,2)/2.d0
+
 
   
     !     --  Loop over integration points
@@ -110,6 +135,27 @@ subroutine el_linelast_2dbasic(lmn, element_identifier, n_nodes, node_property_l
         B(2,2:2*n_nodes:2) = dNdx(1:n_nodes,2)
         B(3,1:2*n_nodes-1:2) = dNdx(1:n_nodes,2)
         B(3,2:2*n_nodes:2) = dNdx(1:n_nodes,1)
+
+        if ( element_identifier ==101) then
+       Bmodifer=0.d00
+       Bmodifer(1,1:2*n_nodes-1:2) = dNdx(1:n_nodes,1)/2.d0
+       Bmodifer(1,2:2*n_nodes:2) = dNdx(1:n_nodes,2)/2.0d0
+
+       Bmodifer(2,1:2*n_nodes)=Bmodifer(1,1:2*n_nodes)
+
+
+       B=B-Bmodifer+dNdx_average
+!         B(1,1:2*n_nodes-1) = B(1,1:2*n_nodes-1) &
+!                        - dNdx(1:n_nodes,1)/2.d0 + dNbardx(1:n_nodes,1)/2.d0
+!         B(1,2:2*n_nodes) = B(1,2:2*n_nodes) &
+!                        - dNdx(1:n_nodes,2)/2.d0 + dNbardx(1:n_nodes,2)/2.d0
+!         B(2,1:2*n_nodes-1) = B(2,1:2*n_nodes-1) &
+!                        - dNdx(1:n_nodes,1)/2.d0 + dNbardx(1:n_nodes,1)/2.d0
+!         B(2,2:2*n_nodes) = B(2,2:2*n_nodes) &
+!                        - dNdx(1:n_nodes,2)/2.d0 + dNbardx(1:n_nodes,2)/2.d0
+
+
+        end if
 
 
         strain = matmul(B,dof_total)
@@ -259,6 +305,7 @@ subroutine fieldvars_linelast_2dbasic(lmn, element_identifier, n_nodes, node_pro
     use Element_Utilities, only : initialize_integration_points
     use Element_Utilities, only : calculate_shapefunctions
     use Element_Utilities, only : invert_small
+    use Element_Utilities, only : dNbardx=>vol_avg_shape_function_derivatives_2D
     implicit none
 
     integer, intent( in )         :: lmn                                                    ! Element number
@@ -303,10 +350,12 @@ subroutine fieldvars_linelast_2dbasic(lmn, element_identifier, n_nodes, node_pro
     real (prec)  ::  sdev(4)                           ! Deviatoric stress
     real (prec)  ::  D(3,3)                            ! stress = D*(strain+dstrain)  (NOTE FACTOR OF 2 in shear strain)
     real (prec)  ::  B(3,length_dof_array)             ! strain = B*(dof_total+dof_increment)
+    real (prec)  ::  dNdx_average(3,length_dof_array),Bmodifer(3,length_dof_array)
     real (prec)  ::  dxidx(2,2), determinant           ! Jacobian inverse and determinant
     real (prec)  ::  x(2,length_coord_array/2)         ! Re-shaped coordinate array x(i,a) is ith coord of ath node
     real (prec)  :: E, xnu, D33, D11, D12              ! Material properties
     real (prec)  :: p, smises , s33                    ! Pressure and Mises stress
+    real (prec)  :: area
     !
     !     Subroutine to compute element contribution to project element integration point data to nodes
 
@@ -330,32 +379,61 @@ subroutine fieldvars_linelast_2dbasic(lmn, element_identifier, n_nodes, node_pro
     E = element_properties(1)
     xnu = element_properties(2)
     d33 = 0.5D0*E/(1+xnu)
-    d11 = (1.D0-xnu)*E/( (1+xnu)*(1-2.D0*xnu) )
-    d12 = xnu*E/( (1+xnu)*(1-2.D0*xnu) )
+    d11 = (1.D0-xnu)*E/( (1.d0+xnu)*(1.d0-2.D0*xnu) )
+    d12 = xnu*E/( (1+xnu)*(1.d0-2.D0*xnu) )
     D(1,2) = d12
       D(2,1) = d12
     D(1,1) = d11
     D(2,2) = d11
     D(3,3) = d33
   
+    dNbardx=0.d0
+    area=0.d0
+    do kint=1,n_points
+    call calculate_shapefunctions(xi(1:2,kint),n_nodes,N,dNdxi)
+        dxdxi = matmul(x(1:2,1:n_nodes),dNdxi(1:n_nodes,1:2))
+        call invert_small(dxdxi,dxidx,determinant)
+        dNdx(1:n_nodes,1:2) = matmul(dNdxi(1:n_nodes,1:2),dxidx)
+        dNbardx=dNbardx+dNdx*w(kint)*determinant
+        area=area+w(kint)*determinant
+    end do
+        dNbardx=dNbardx/area
+        dNdx_average=0.d0
+        dNdx_average(1,1:2*n_nodes-1:2)=dNbardx(1:n_nodes,1)
+        dNdx_average(1,2:2*n_nodes:2)=dNbardx(1:n_nodes,2)
+        dNdx_average(2,1:2*n_nodes-1:2)=dNbardx(1:n_nodes,1)
+        dNdx_average(2,2:2*n_nodes:2)=dNbardx(1:n_nodes,2)
+
+
+
     !     --  Loop over integration points
     do kint = 1, n_points
         call calculate_shapefunctions(xi(1:2,kint),n_nodes,N,dNdxi)
         dxdxi = matmul(x(1:2,1:n_nodes),dNdxi(1:n_nodes,1:2))
         call invert_small(dxdxi,dxidx,determinant)
-      dNdx(1:n_nodes,1:2) = matmul(dNdxi(1:n_nodes,1:2),dxidx)
+        dNdx(1:n_nodes,1:2) = matmul(dNdxi(1:n_nodes,1:2),dxidx)
         B = 0.d0
         B(1,1:2*n_nodes-1:2) = dNdx(1:n_nodes,1)
         B(2,2:2*n_nodes:2) = dNdx(1:n_nodes,2)
         B(3,1:2*n_nodes-1:2) = dNdx(1:n_nodes,2)
         B(3,2:2*n_nodes:2) = dNdx(1:n_nodes,1)
 
+        if ( element_identifier ==101) then
+        Bmodifer=0.d0
+        Bmodifer(1,1:2*n_nodes-1:2) = dNdx(1:n_nodes,1)
+        Bmodifer(1,2:2*n_nodes:2) = dNdx(1:n_nodes,2)
+
+        Bmodifer(2,1:2*n_nodes)=Bmodifer(1,1:2*n_nodes)
+
+
+        B=B-1./2.*Bmodifer+1./2.*dNdx_average
+        end if
         strain = matmul(B,dof_total)
         dstrain = matmul(B,dof_increment)
         stress = matmul(D,strain+dstrain)
         s33 = xnu*sum(stress(1:2))
         p = (s33 + sum(stress(1:2)))/3.d0
-        s33 = -xnu*stress(1)
+!        s33 = -xnu*stress(1)
         sdev(1:2) = stress(1:2)
         sdev(3) = s33
         sdev(4) = stress(3)

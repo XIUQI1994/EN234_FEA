@@ -48,7 +48,7 @@
 %       Define element properties - the values are passed to user subroutine elstif in the order they are listed here
 %       For the example provided, the params are Youngs Modulus, Poissons ratio
         PROPERTIES
-         100.d0, 0.3d0
+         100.d0, 0.499d0
         END PROPERTIES
 %     Define mass density (for explicity dynamics only)
 %       DENSITY, 10.d0
@@ -103,10 +103,14 @@
 %     
         DEGREES OF FREEDOM
            left, 1, VALUE, 0.d0
-           right, 1, HISTORY, dof_history
+          right, 1, HISTORY, dof_history
            base, 2, VALUE, 0.d0
         END DEGREES OF FREEDOM
 
+     %  DISTRIBUTED LOADS
+      
+      %    end_element, 2, Value, 10.d0,0.d0,0.d0
+       % END DISTRIBUTED LOADS
 
    END BOUNDARY CONDITIONS
 
