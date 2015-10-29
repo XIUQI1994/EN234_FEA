@@ -54,10 +54,10 @@ subroutine user_print(n_steps)
                                                        n_state_vars_per_intpt)
    call compute_element_stress_average_3D(lmn,vol_averaged_stress,vol_averaged_state_variables,length_state_variable_array, &
                                                        n_state_vars_per_intpt)
-!write(user_print_units(1),*) TIME+DTIME,vol_averaged_strain(1)
-!write(user_print_units(2),*) TIME+DTIME,vol_averaged_stress(1)
-write(user_print_units(1),*) vol_averaged_strain(1)
-write(user_print_units(2),*) vol_averaged_stress(1)
+write(user_print_units(1),*) TIME+DTIME,vol_averaged_strain(1)
+write(user_print_units(2),*) TIME+DTIME,vol_averaged_stress(1)
+!write(user_print_units(1),*) vol_averaged_strain(1)
+!write(user_print_units(2),*) vol_averaged_stress(1)
 
 !    if (TIME<1.d-12) then
 !      if (n_state_vars_per_intpt<6) then
