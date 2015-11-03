@@ -38,7 +38,7 @@
 %     The parameters are no. nodes on the element, total no. state variables, integer identifier
 
       ELEMENTS
-        PARAMETERS, 8, 0, 1002
+        PARAMETERS, 8, 0, 1003
 %       Define element properties - the values are passed to user subroutine elstif in the order they are listed here
 %       For the example provided, the params are Youngs Modulus, Poissons ratio
         PROPERTIES
@@ -128,7 +128,7 @@
 
 %   The CHECK STIFFNESS key tests the element subroutine to ensure that
 %   the residual force vector is consistent with the stiffness
-       CHECK STIFFNESS, 1002
+       CHECK STIFFNESS, 1003
 
 %     STOP
 
@@ -169,7 +169,7 @@
 %         In this example the states are the stresses sxx,syy,szz,sxy,sxz,syz
          PRINT STATE, Output_files\contourplots.dat
 %            DEGREES OF FREEDOM
-            FIELD VARIABLES, S11,S22,S33,S12,S13,S23
+            FIELD VARIABLES, S11,S22,S33,S12,S13,S23,SP1,SP2,SP3
             DISPLACED MESH
             DISPLACEMENT SCALE FACTOR, 1.d0
          END PRINT STATE

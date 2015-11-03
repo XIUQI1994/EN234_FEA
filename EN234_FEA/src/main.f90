@@ -72,10 +72,10 @@ program en234fea
 !  Homework 5, small-strain B bar element - test with same files as in HW3, but
 !  try approaching incompressible limit by making Poisson's ratio close to 0.5
 
- infil = './input_files/hypoelastic_3d.in'
-  open (unit = IOR, file = infil, status = 'old', ERR=500)
-  outfil = './Output_files/hypoelastic_3d.out'
-  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+ !infil = './input_files/hypoelastic_3d.in'
+ !open (unit = IOR, file = infil, status = 'old', ERR=500)
+ ! outfil = './Output_files/hypoelastic_3d.out'
+ ! open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 
 !
 ! Homework 6: small-strain Armstrong-Frederick kinematic hardening model
@@ -85,16 +85,17 @@ program en234fea
 !  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 
 ! Homework 7, stretch a hyperelastic bar, check stiffness.
-!  infil = './input_files/Hyperelastic_bar_stretch.in'
-!  open (unit = IOR, file = infil, status = 'old', ERR=500)
-!  outfil = './Output_files/hyperelastic_bar_stretch.out'
-!  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+! infil = './input_files/Hyperelastic_bar_stretch.in'
+ ! open (unit = IOR, file = infil, status = 'old', ERR=500)
+ ! outfil = './Output_files/hyperelastic_bar_stretch.out'
+ ! open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 !!
 !!  Homework 7, stretch and rotate a hyperelastic bar
-!  infil = './input_files/Hyperelastic_stretch_rotate.in'
-!  open (unit = IOR, file = infil, status = 'old', ERR=500)
-!  outfil = './Output_files/hyperelastic_stretch_rotate.out'
-!  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+
+ infil = './input_files/Hyperelastic_stretch_rotate.in'
+  open (unit = IOR, file = infil, status = 'old', ERR=500)
+  outfil = './Output_files/hyperelastic_stretch_rotate.out'
+  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 !
 ! Homework 7, stretch a hyperelastic plate with a central hole
 !  infil = './input_files/Holeplate_hyperelastic.in'
