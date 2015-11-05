@@ -258,7 +258,7 @@ subroutine el_hyperelastic_3dbasic(lmn, element_identifier, n_nodes, node_proper
        G(2,8)=Bdefor(2,3)
        G(3,3)=Bdefor(3,3)
        G(3,7)=Bdefor(1,3)
-       G(3,9)=Bdefor(1,3)
+       G(3,9)=Bdefor(2,3)
        G(4,1)=Bdefor(1,2)
        G(4,2)=Bdefor(1,2)
        G(4,4)=Bdefor(2,2)
