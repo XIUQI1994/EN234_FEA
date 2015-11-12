@@ -17,6 +17,7 @@
                   '  Ratio                      ', D15.6/     &
                   '  Tolerance                  ', D15.6)
    converged = .false.
+
    if (nodal_force_norm+correction_norm>0.d0) then
      if (unbalanced_force_norm/(nodal_force_norm+correction_norm) < newtonraphson_tolerance) converged = .true.
    else

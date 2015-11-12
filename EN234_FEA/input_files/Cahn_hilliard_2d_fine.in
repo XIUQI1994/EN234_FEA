@@ -9177,8 +9177,8 @@
 
 %   The CHECK STIFFNESS key tests the element subroutine to ensure that
 %   the residual force vector is consistent with the stiffness
-%       CHECK STIFFNESS, 600
-%       STOP
+      CHECK STIFFNESS, 600
+ %      STOP
 
 
 
@@ -9208,7 +9208,7 @@
 %                        UNSYMMETRIC  (optional - only for unsymmetric stiffness)
 
 
-         SOLVER, DIRECT, NONLINEAR, 1.d-05,15, UNSYMMETRIC
+         SOLVER, DIRECT, NONLINEAR, 1.d-08,15, UNSYMMETRIC
 
 
          PRINT STATE, Output_files\contourplots.dat
