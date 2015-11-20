@@ -168,9 +168,16 @@ subroutine user_element_dynamic(lmn, element_identifier, n_nodes, node_property_
 
     updated_state_variables = initial_state_variables
 
-    if ( element_identifier == 1001 ) then              ! Basic fully integrated 3D linear elastic element
+    if ( element_identifier ==1001 ) then              ! Basic fully integrated 3D linear elastic element
 
         call el_linelast_3dbasic_dynamic(lmn, element_identifier, n_nodes, node_property_list, &           ! Input variables
+            n_properties, element_properties,element_coords, length_coord_array, &                         ! Input variables
+            dof_increment, dof_total, length_dof_array,  &                                                 ! Input variables
+            n_state_variables, initial_state_variables, &                                                  ! Input variables
+            updated_state_variables,element_residual,element_deleted)
+      else       if ( element_identifier == 3001 ) then              ! Basic fully integrated 3D linear elastic element
+
+        call el_fracture_dynamic(lmn,element_identifier, n_nodes, node_property_list, &           ! Input variables
             n_properties, element_properties,element_coords, length_coord_array, &                         ! Input variables
             dof_increment, dof_total, length_dof_array,  &                                                 ! Input variables
             n_state_variables, initial_state_variables, &                                                  ! Input variables
@@ -259,6 +266,14 @@ subroutine user_element_fieldvariables(lmn, element_identifier, n_nodes, node_pr
             n_state_variables, initial_state_variables,updated_state_variables, &                       ! Input variables
             n_field_variables,field_variable_names, &                                                   ! Field variable definition
             nodal_fieldvariables)      ! Output variables
+else if ( element_identifier == 3001 ) then              ! Basic fully integrated 3D linear elastic element
+
+        call fieldvars_fracture_3dbasic(lmn, element_identifier, n_nodes, node_property_list, &         ! Input variables
+            n_properties, element_properties,element_coords, length_coord_array,  &                     ! Input variables
+            dof_increment, dof_total, length_dof_array,  &                                              ! Input variables
+            n_state_variables, initial_state_variables,updated_state_variables, &                       ! Input variables
+            n_field_variables,field_variable_names, &                                                   ! Field variable definition
+            nodal_fieldvariables)
 
      else if ( element_identifier == 1003 ) then              ! Basic fully integrated 3D linear elastic element
 
