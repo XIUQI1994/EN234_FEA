@@ -1,0 +1,77 @@
+  *** Warning *** 
+  A zone to be printed using a STATE PRINT command contains nodes with
+  an inconsistent number of DOF 
+  This zone will not be printed 
+  *** Warning *** 
+  No printable zones were found 
+  STATE PRINT has been suppressed 
+
+
+ The input file has been read successfully 
+ Number of elements:                2
+ Number of nodes:                  14
+ Number of constraints:             0
+ Total no. degrees of freedom:     38
+  *** Warning *** 
+  A zone to be printed using a PRINT INITIAL MESH command contains elements with
+  a number of nodes that cannot be printed
+  This zone will not be printed 
+
+
+ Direct Solver Profiler has completed profile computation 
+     Total number of equations         38
+     Maximum half bandwidth:           24
+     Mean half bandwidth:              14
+     RMS half bandwidth:               16
+     Size of stiffness matrix:        534
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.2827E+02
+      Min diagonal in reduced matrix:    0.1948E-01
+      Ratio:                             0.1451E+04
+      Maximum no. diagonal digits lost:   1
+
+
+    Step number     1 has completed successfully
+    Steps remaining:                           2
+    Elapsed time:                     1.0000    
+    Time remaining:                   9.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.2827E+02
+      Min diagonal in reduced matrix:    0.1948E-01
+      Ratio:                             0.1451E+04
+      Maximum no. diagonal digits lost:   1
+
+
+    Step number     2 has completed successfully
+    Steps remaining:                           1
+    Elapsed time:                     2.0000    
+    Time remaining:                   8.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02
+
+
+ Direct Solver has completed LU decomposition 
+    Conditioning information: 
+      Max diagonal in reduced matrix:    0.2827E+02
+      Min diagonal in reduced matrix:    0.1948E-01
+      Ratio:                             0.1451E+04
+      Maximum no. diagonal digits lost:   1
+
+
+    Step number     3 has completed successfully
+    Steps remaining:                           0
+    Elapsed time:                     3.0000    
+    Time remaining:                   7.0000    
+    Time step has been adjusted to:   1.0000    
+    Max time step:                    1.0000    
+    Min time step:                   0.10000E-02

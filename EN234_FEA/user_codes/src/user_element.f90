@@ -56,9 +56,31 @@ subroutine user_element_static(lmn, element_identifier, n_nodes, node_property_l
     updated_state_variables = initial_state_variables
 
 
-    if ( element_identifier == 1001 ) then              ! Basic fully integrated 3D linear elastic element
+    if ( element_identifier == 1001) then              ! Basic fully integrated 3D linear elastic element
 
         call el_linelast_3dbasic(lmn, element_identifier, n_nodes, node_property_list, &           ! Input variables
+    n_properties, element_properties, element_coords, length_coord_array, &                      ! Input variables
+    dof_increment, dof_total, length_dof_array, &                                                ! Input variables
+    n_state_variables, initial_state_variables, &                                                ! Input variables
+    updated_state_variables,element_stiffness,element_residual, fail)      ! Output variables
+    ELSE  if ( element_identifier == 1005 ) then              ! Basic fully integrated 3D linear elastic element
+
+        call el_HYBRID_3dbasic(lmn, element_identifier, n_nodes, node_property_list, &           ! Input variables
+    n_properties, element_properties, element_coords, length_coord_array, &                      ! Input variables
+    dof_increment, dof_total, length_dof_array, &                                                ! Input variables
+    n_state_variables, initial_state_variables, &                                                ! Input variables
+    updated_state_variables,element_stiffness,element_residual, fail)      ! Output variables
+ ELSE  if ( element_identifier == 1010 ) then              ! Basic fully integrated 3D linear elastic element
+
+        call el_hybrid_3d_global_basic(lmn, element_identifier, n_nodes, node_property_list, &           ! Input variables
+    n_properties, element_properties, element_coords, length_coord_array, &                      ! Input variables
+    dof_increment, dof_total, length_dof_array, &                                                ! Input variables
+    n_state_variables, initial_state_variables, &                                                ! Input variables
+    updated_state_variables,element_stiffness,element_residual, fail)      ! Output variables
+
+    ELSE  if ( element_identifier == 1011 ) then              ! Basic fully integrated 3D linear elastic element
+
+        call el_hybrid_3dfinite(lmn, element_identifier, n_nodes, node_property_list, &           ! Input variables
     n_properties, element_properties, element_coords, length_coord_array, &                      ! Input variables
     dof_increment, dof_total, length_dof_array, &                                                ! Input variables
     n_state_variables, initial_state_variables, &                                                ! Input variables
@@ -261,6 +283,30 @@ subroutine user_element_fieldvariables(lmn, element_identifier, n_nodes, node_pr
     if ( element_identifier == 1001 ) then              ! Basic fully integrated 3D linear elastic element
 
         call fieldvars_linelast_3dbasic(lmn, element_identifier, n_nodes, node_property_list, &         ! Input variables
+            n_properties, element_properties,element_coords, length_coord_array,  &                     ! Input variables
+            dof_increment, dof_total, length_dof_array,  &                                              ! Input variables
+            n_state_variables, initial_state_variables,updated_state_variables, &                       ! Input variables
+            n_field_variables,field_variable_names, &                                                   ! Field variable definition
+            nodal_fieldvariables)      ! Output variables
+      ELSE    if ( element_identifier == 1005) then              ! Basic fully integrated 3D linear elastic element
+
+        call fieldvars_HYBRID_3dbasic(lmn, element_identifier, n_nodes, node_property_list, &         ! Input variables
+            n_properties, element_properties,element_coords, length_coord_array,  &                     ! Input variables
+            dof_increment, dof_total, length_dof_array,  &                                              ! Input variables
+            n_state_variables, initial_state_variables,updated_state_variables, &                       ! Input variables
+            n_field_variables,field_variable_names, &                                                   ! Field variable definition
+            nodal_fieldvariables)      ! Output variables
+            ELSE    if ( element_identifier == 1010 ) then              ! Basic fully integrated 3D linear elastic element
+
+        call fieldvars_hybrid_3d_global_basic(lmn, element_identifier, n_nodes, node_property_list, &         ! Input variables
+            n_properties, element_properties,element_coords, length_coord_array,  &                     ! Input variables
+            dof_increment, dof_total, length_dof_array,  &                                              ! Input variables
+            n_state_variables, initial_state_variables,updated_state_variables, &                       ! Input variables
+            n_field_variables,field_variable_names, &                                                   ! Field variable definition
+            nodal_fieldvariables)      ! Output variables
+               ELSE    if ( element_identifier == 1011 ) then              ! Basic fully integrated 3D linear elastic element
+
+        call fieldvars_hybrid_3dfinite(lmn, element_identifier, n_nodes, node_property_list, &         ! Input variables
             n_properties, element_properties,element_coords, length_coord_array,  &                     ! Input variables
             dof_increment, dof_total, length_dof_array,  &                                              ! Input variables
             n_state_variables, initial_state_variables,updated_state_variables, &                       ! Input variables

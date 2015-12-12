@@ -17,10 +17,10 @@
 
  Direct Solver has completed LU decomposition 
     Conditioning information: 
-      Max diagonal in reduced matrix:    0.5882E+05
-      Min diagonal in reduced matrix:    0.4594E+00
-      Ratio:                             0.1280E+06
-      Maximum no. diagonal digits lost:   5
+      Max diagonal in reduced matrix:    0.3562E+02
+      Min diagonal in reduced matrix:    0.4483E+00
+      Ratio:                             0.7944E+02
+      Maximum no. diagonal digits lost:   1
 
 
     Step number     1 has completed successfully

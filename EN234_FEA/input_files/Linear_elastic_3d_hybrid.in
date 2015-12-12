@@ -16,7 +16,7 @@
 %    The parameters are # of coords, # of DOF, and an optional integer identifier
        PARAMETERS, 3, 3, 1
 %      Specify which nodal DOF are displacements.  In the example, DOF 1 is the x displacement, 2 is the y displacement, 3 is the z displacement
-       DISPLACEMENT DOF, 1, 2, 3
+%       DISPLACEMENT DOF, 1, 2, 3
 %    Enter x,y,z coords of nodes.   The node number is optional, and is ignored in the code.
          COORDINATES
          1,  0.d0, 0.d0, 0.d0
@@ -33,12 +33,17 @@
         12,   2.d0, 1.d0, 1.d0
         END COORDINATES
       END NODES
+       
+       NODES
+        PARAMETERS, 0, 1, 2    
+       CREATE NODES, 2
+      end nodes
 %
 %     The ELEMENT command defines properties of elements
 %     The parameters are no. nodes on the element, total no. state variables, integer identifier
 
       ELEMENTS
-        PARAMETERS, 8, 80, 1001
+        PARAMETERS, 9, 90, 1010
 %       Define element properties - the values are passed to user subroutine elstif in the order they are listed here
 %       For the example provided, the params are Youngs Modulus, Poissons ratio
         PROPERTIES
@@ -49,8 +54,8 @@
 %     Define element connectivity
 %     The element number (first number in the list) is optional, and is ignored in the code
         CONNECTIVITY, zone1
-    1,     1, 2, 3, 4, 5, 6, 7, 8
-    2,     2, 9, 10, 3, 6, 11, 12, 7
+    1,     1, 2, 3, 4, 5, 6, 7, 8,13
+    2,     2, 9, 10, 3, 6, 11, 12, 7,14
         END CONNECTIVITY
 
 %     The PROPERTIES, PARAMETERS, CONNECTIVITY keywords can be repeated here to define more set of elements with different properties
@@ -144,7 +149,7 @@
 
 %   The CHECK STIFFNESS key tests the element subroutine to ensure that
 %   the residual force vector is consistent with the stiffness
-      CHECK STIFFNESS, 1001
+ %     CHECK STIFFNESS, 1010
 
 
 
@@ -190,11 +195,11 @@
          END PRINT STATE
 
 %        The lines below are just examples - no code exists to use them.
-%          USER PRINT FILES
+         USER PRINT FILES
 %          List file names to contain the output. Fortran unit numbers are provided to each file in the user subroutine
-%            filename1.dat
+            hybrid_global_output.dat
 %            filename2.dat
-%          END USER PRINT FILES
+          END USER PRINT FILES
 %          USER PRINT PARAMETERS
 %            list of parameters to be passed to the subroutine
 %             1.d0, 6.d0

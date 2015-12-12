@@ -8,16 +8,24 @@ program en234fea
 
 !  Demo codes - basic 3D linear elasticity
 !
-!infil = './input_files/linear_elastic_3d.in'
+!infil = './input_files/linear_elastic_3d_hybrid.in'
 !open (unit = IOR, file = infil, status = 'old', ERR=500)
-!outfil = './Output_files/linear_elastic_3d.out'
+!outfil = './Output_files/linear_elastic_3d_hybrid.out'
+!open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+!infil = './input_files/linear_elastic_3d_hybridfinite.in'
+!open (unit = IOR, file = infil, status = 'old', ERR=500)
+!outfil = './Output_files/linear_elastic_3d_hybridfinite.out'
 !open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 
-!  infil = './input_files/Holeplate_3d.in'
+! infil = './input_files/Holeplate_3d.in'
 !  open (unit = IOR, file = infil, status = 'old', ERR=500)
-!  outfil = './Output_files/Holeplate_3d.out'
+! outfil = './Output_files/Holeplate_3d.out'
 !  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 
+infil = './input_files/linear_elastic_3d.in'
+open (unit = IOR, file = infil, status = 'old', ERR=500)
+outfil = './Output_files/linear_elastic_3d.out'
+open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 
 !  infil = './input_files/linear_elastic_3d_dynamic.in'
 !  open (unit = IOR, file = infil, status = 'old', ERR=500)
@@ -72,9 +80,9 @@ program en234fea
 !  Homework 5, small-strain B bar element - test with same files as in HW3, but
 !  try approaching incompressible limit by making Poisson's ratio close to 0.5
 
- !infil = './input_files/hypoelastic_3d.in'
+! infil = './input_files/hypoelastic_3d.in'
  !open (unit = IOR, file = infil, status = 'old', ERR=500)
- ! outfil = './Output_files/hypoelastic_3d.out'
+  !outfil = './Output_files/hypoelastic_3d.out'
  ! open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 
 !
@@ -106,10 +114,10 @@ program en234fea
 
 
 !!  Homework 8, solve the 2D Cahn-Hilliard equation
-  infil = './input_files/cahn_hilliard_2d_fine.in'
-     open (unit = IOR, file = infil, status = 'old', ERR=500)
- outfil = './Output_files/cahn_hilliard_2d_fine.out'
-  open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
+ ! infil = './input_files/cahn_hilliard_2d_fine.in'
+ !    open (unit = IOR, file = infil, status = 'old', ERR=500)
+ !outfil = './Output_files/cahn_hilliard_2d_fine.out'
+ ! open (UNIT = IOW, FILE = outfil, STATUS = 'unknown', ERR=500)
 
 
 !!  Homework 9, Dynamic fracture with explicit dynamics, finite strain Gurson model.
